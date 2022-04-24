@@ -16,7 +16,7 @@ class Signup : AppCompatActivity() {
             var pass=password.text.toString()
             var email=email.text.toString()
             var no=phone.text.toString().toLong()
-            var s1=register(name,username,pass,email,no)
+            var s1=Register(name,username,pass,email,no)
             var db=DBHelper(this)
             var falg=db.insert(s1)
             var intent = Intent(this,MainActivity::class.java)

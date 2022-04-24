@@ -25,11 +25,11 @@ class MainActivity : AppCompatActivity() {
                 var db = DBHelper(this)
                 var arr=db.retriveall()
                 for (arr1 in arr) {
-                    if (username.equals("${arr1.username}") && pss.equals("${arr1.password}")) {
+                    if (username.equals("${arr1.s_username}") && pss.equals("${arr1.s_password}")) {
 
                         var preference = getSharedPreferences("MyPref", MODE_PRIVATE)
                         var editor = preference.edit()
-                        editor.putString("UserName", username)
+                        editor.putString("UserName", "")
                         editor.commit()
                         var intent = Intent(applicationContext, Welcome::class.java)
                         startActivity(intent)
@@ -54,6 +54,10 @@ class MainActivity : AppCompatActivity() {
         signup.setOnClickListener {
             var intant=Intent(this,Signup::class.java)
             startActivity(intant)
+        }
+        viewData.setOnClickListener {
+            var intent = Intent(this,ViewAll::class.java)
+            startActivity(intent)
         }
 
     }

@@ -5,7 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DBHelper(var context: Context): SQLiteOpenHelper(context, DB_NAME,null, DB_VERSION) {
+class DBHelper(var context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     companion object {
         private var DB_NAME = "signup"
         private var DB_TABEL = "sup"
@@ -30,17 +30,17 @@ class DBHelper(var context: Context): SQLiteOpenHelper(context, DB_NAME,null, DB
 
     }
 
-    fun retriveall(): ArrayList<register> {
+    fun retriveall(): ArrayList<Register> {
         var db = readableDatabase
         var cursor = db.query(DB_TABEL, null, null, null, null, null, null)
-        var arr: ArrayList<register> = ArrayList()
+        var arr: ArrayList<Register> = ArrayList()
         while (cursor.moveToNext()) {
-
+            var name = cursor.getString(0)
             var username = cursor.getString(1)
             var password = cursor.getString(2)
-
-
-            var emp = register(username, password)
+            var email = cursor.getString(3)
+            var number = cursor.getLong(4)
+            var emp = Register(name, username, password, email, number)
             arr.add(emp)
 
 
@@ -49,19 +49,32 @@ class DBHelper(var context: Context): SQLiteOpenHelper(context, DB_NAME,null, DB
 
     }
 
-        fun insert(emp: register): Boolean {
-            var db = writableDatabase
-            var cv = ContentValues()
-            cv.put(DB_NAMEE, emp.name)
-            cv.put(DB_USERNAME, emp.username)
-            cv.put(DB_PASSWORD, emp.password)
-            cv.put(DB_EMAIL, emp.email)
-            cv.put(DB_MOBILENUBMER, emp.number)
-            var flag = db.insert(DB_TABEL, null, cv)
-            if (flag > 0) {
-                return true
-            } else {
-                return false
-            }
+    fun insert(emp: Register):Boolean {
+        var db = writableDatabase
+        var cv = ContentValues()
+        cv.put(DB_NAMEE, emp.s_name)
+        cv.put(DB_USERNAME, emp.s_username)
+        cv.put(DB_PASSWORD, emp.s_password)
+        cv.put(DB_EMAIL, emp.s_email)
+        cv.put(DB_MOBILENUBMER, emp.s_number)
+        var flag = db.insert(DB_TABEL, null, cv)
+        if (flag > 0)
+        {
+            return true
+        }
+        else
+        {
+            return false
         }
     }
+    fun Delete(s_name:String)
+    {
+        var db=writableDatabase
+        db.delete(DB_TABEL,"$DB_NAMEE=$s_name",null)
+        db.close()
+    }
+
+
+
+
+}

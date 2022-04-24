@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Complete">
         <activity
+            android:name=".ViewAll"
+            android:exported="false" />
+        <activity
             android:name=".Signup"
             android:exported="false" />
         <activity

@@ -29,7 +29,7 @@ class Splash : AppCompatActivity() {
             }
             else
             {
-               var intent = Intent(this,Welcome::class.java)
+               var intent = Intent(this,MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }
